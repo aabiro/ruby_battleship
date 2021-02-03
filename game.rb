@@ -25,24 +25,24 @@ if alignment == 'v'
     puts "You chose vertical"
 end
 
+
+starting_tiles = board1.valid_starting_tiles(alignment)
 tile = nil
-until board1.valid_starting_tiles(alignment).include?(tile)
+until starting_tiles.include?(tile)
     puts "Choose your Battle Ship's starting topmost, leftmost tile (top left - A1, bottom right - H8) : "
     tile = gets.chomp
-    puts "Invalid selection" unless board1.valid_starting_tiles(alignment).include?(tile)
+    puts "Invalid selection" unless starting_tiles.include?(tile)
 end
 
 alignments = ["h", "v"]
 player2_alignment = alignments[rand(1)]
-valid_tiles = board1.valid_starting_tiles(player2_alignment)
+valid_tiles = board2.valid_starting_tiles(player2_alignment)
 player2_tile = valid_tiles[rand(valid_tiles.size)]
+
 
 board1.place_battleship(alignment, tile)
 board2.place_battleship(player2_alignment, player2_tile)
 puts "Player 2 placed their Battleship"
-
-
-
 
 until player1.hits == 3 || player2.hits == 3
 
@@ -59,12 +59,10 @@ until player1.hits == 3 || player2.hits == 3
     end
 
     random_tile = valid_tiles[rand(valid_tiles.size)]
-
-    player2.take_shot(random_tile, board1)
+    player2.take_shot(board1.valid_tile(random_tile), board1)
     if player2.hits == 3
         puts "Player 2 wins!"
         break
     end
-
 end
 

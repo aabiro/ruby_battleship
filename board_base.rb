@@ -11,7 +11,7 @@ class BoardBase
 
     def valid_starting_tiles(alignment)
         result = []
-        if alignment.lower == 'vertical'
+        if alignment.downcase == 'vertical'
             result = [
                 "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8",
                 "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8",
@@ -42,7 +42,9 @@ class BoardBase
             'C' => 2,
             'D' => 3,
             'E' => 4,
-            'F' => 5
+            'F' => 5,
+            'G' => 6,
+            'H' => 7
         }
     end
 end
